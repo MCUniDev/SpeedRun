@@ -43,9 +43,14 @@ public class SpeedRunCommands implements CommandExecutor {
             if (args.length > 0) {
                 if ("help".equals(args[0])) {
                     message.PrivateMessage("------------ SpeedRun Help ------------", false);
-                    message.PrivateMessage("/speedrun item - See / set the goal item for the game.", false);
-                    message.PrivateMessage("/speedrun start - Start the game.", false);
-                    message.PrivateMessage("/speedrun end - End the game.", false);
+                    message.PrivateMessage("/speedrun status - Check the current status of the game.", false);
+                    if (player.hasPermission("speedrun.admin")) {
+                        message.PrivateMessage("/speedrun item - See / set the goal item for the game.", false);
+                        message.PrivateMessage("/speedrun start - Start the game.", false);
+                        message.PrivateMessage("/speedrun end - End the game.", false);
+                    } else {
+                        message.PrivateMessage("/speedrun item - See goal item for the game.", false);
+                    }
                     message.PrivateMessage("------------ SpeedRun Help ------------", false);
                     return true;
                 } else if ("item".equals(args[0])) {
@@ -66,7 +71,7 @@ public class SpeedRunCommands implements CommandExecutor {
                         try
                         {
                             plugin.GoalItem = Material.valueOf(materialName );
-                            message.PrivateMessage("Item has been set to "+args[1].toUpperCase(), false);
+                            message.PrivateMessage("Item has been set to " + plugin.GoalItem, false);
                         }
                         catch (Exception e)
                         {
@@ -132,6 +137,19 @@ public class SpeedRunCommands implements CommandExecutor {
                         message.PrivateMessage("You don't have the required permissions to use this command.", true);
                         return true;
                     }
+                } else if ("status".equals(args[0])) {
+                    message.BroadcastMessage("------ Game Status ------");
+                    if (plugin.GameRunning) {
+                        message.BroadcastMessage("PROGRESS: In progress");
+                    } else {
+                        message.BroadcastMessage("PROGRESS: Waiting");
+                    }
+                    if (plugin.GoalItem == null) {
+                        message.BroadcastMessage("GOAL: Not set");
+                    } else {
+                        message.BroadcastMessage("GOAL: " + plugin.GoalItem);
+                    }
+                    message.BroadcastMessage("------ Game Status ------");
                 } else {
                     message.PrivateMessage("Unknown command. Use /speedrun help for help.", true);
                     return true;
