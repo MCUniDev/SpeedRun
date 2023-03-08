@@ -1,0 +1,16 @@
+name: SpeedRun
+version: 1.5
+main: org.mcuni.speedrun.SpeedRun
+api-version: 1.19
+authors: [ LewisMilburn, MCUniDev ]
+description: A basic Speed Run plugin by MCUni.
+website: https://dev.mcuni.org/speedrun
+depend: ["My_Worlds", "BKCommonLib"]
+commands:
+  speedrun:
+    description: Main command
+    usage: /<command>
+    aliases: ['sr']
+permissions:
+  speedrun.admin:
+    description: Gives access to all SpeedRun commands.
