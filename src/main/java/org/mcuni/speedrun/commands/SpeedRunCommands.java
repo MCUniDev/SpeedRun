@@ -132,18 +132,18 @@ public class SpeedRunCommands implements CommandExecutor {
                         return true;
                     }
                 } else if ("status".equals(args[0])) {
-                    message.BroadcastMessage("------ Game Status ------");
+                    message.PrivateMessage("------ Game Status ------", true);
                     if (plugin.GameRunning) {
-                        message.BroadcastMessage("PROGRESS: In progress");
+                        message.PrivateMessage("PROGRESS: In progress", true);
                     } else {
-                        message.BroadcastMessage("PROGRESS: Waiting");
+                        message.PrivateMessage("PROGRESS: Waiting", true);
                     }
                     if (plugin.GoalItem == null) {
-                        message.BroadcastMessage("GOAL: Not set");
+                        message.PrivateMessage("GOAL: Not set", true);
                     } else {
-                        message.BroadcastMessage("GOAL: " + plugin.GoalItem);
+                        message.PrivateMessage("GOAL: " + plugin.GoalItem, true);
                     }
-                    message.BroadcastMessage("------ Game Status ------");
+                    message.PrivateMessage("------ Game Status ------", true);
                 } else {
                     message.PrivateMessage("Unknown command. Use /speedrun help for help.", true);
                     return true;
