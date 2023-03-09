@@ -19,7 +19,7 @@ public class SpeedRunCommands implements CommandExecutor {
     public SpeedRun plugin;
 
     /**
-     * Constructor for the KitCommands class.
+     * Constructor for the SpeedRunCommands class.
      * @param plugin References to the main kit plugin class.
      */
     public SpeedRunCommands(SpeedRun plugin) {
@@ -28,7 +28,7 @@ public class SpeedRunCommands implements CommandExecutor {
     }
 
     /**
-    * /kit command handler.
+    * /speedrun command handler.
     * @param commandSender Information about who sent the command - player or console.
      * @param command Information about what command was sent.
      * @param s Command label - not used here.
