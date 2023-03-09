@@ -18,7 +18,7 @@ public class EntityPickupItem implements Listener {
 
     /**
      * Constructor for the EntityPickupItem event class.
-     * @param plugin References to the main kit plugin class.
+     * @param plugin References to the main SpeedRun plugin class.
      */
     public EntityPickupItem(SpeedRun plugin) {
         this.plugin = plugin;

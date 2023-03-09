@@ -7,6 +7,8 @@ import org.bukkit.Material;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Boss;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcuni.speedrun.commands.SpeedRunCommands;
 import org.mcuni.speedrun.events.EntityPickupItem;
@@ -30,6 +32,12 @@ public class SpeedRun extends JavaPlugin {
         loadClasses();
         loadCommands();
         loadEventHandlers();
+
+        if (Bukkit.getOnlinePlayers().size() > 0) {
+            for (Player on : Bukkit.getOnlinePlayers()) {
+                BossBarSystemClass.AddPlayer(on);
+            }
+        }
     }
 
     @Override
@@ -84,6 +92,13 @@ public class SpeedRun extends JavaPlugin {
     public void SetPlayerMode(String Mode) {
         for(Player p : Bukkit.getOnlinePlayers()){
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "gamemode " + Mode + " " + p.getName());
+        }
+    }
+
+    @EventHandler
+    public void playerJoin(PlayerJoinEvent event) {
+        if (!BossBarSystemClass.GetBar().getPlayers().contains(event.getPlayer())) {
+            BossBarSystemClass.AddPlayer(event.getPlayer());
         }
     }
 }
