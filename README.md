@@ -1,4 +1,4 @@
 # SpeedRun
 A SpeedRun plugin used on the MCUni network.
 
-WIKI: https://github.com/lewmilburn/SpeedRun/wiki
+WIKI: https://github.com/MCUniDev/SpeedRun/wiki
