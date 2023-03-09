@@ -118,21 +118,7 @@ public class SpeedRunCommands implements CommandExecutor {
                             message.PrivateMessage("You must set a goal item to start. Use /speedrun item <item> to set the goal item.", true);
                             return true;
                         }
-                        message.BroadcastMessage("SpeedRun is now starting");
-                        message.BroadcastMessage("[1/4] Configuring game...");
-                        message.BroadcastMessage("[2/4] Generating world...");
-                        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "world create "+ Objects.requireNonNull(plugin.getConfig().getString("GameWorld")));
-                        while (Bukkit.getWorld(Objects.requireNonNull(plugin.getConfig().getString("GameWorld"))) == null) {
-                            // Wait...
-                        }
-                        message.BroadcastMessage("[3/4] Teleporting...");
-                        plugin.TeleportPlayers("SpeedRun");
-                        message.BroadcastMessage("[4/4] Setting gamemode...");
-                        plugin.SetPlayerMode("survival");
-                        message.BroadcastMessage("\n\n");
-                        message.BroadcastMessage(ChatColor.WHITE + "The first person to find a " + ChatColor.GREEN + plugin.GoalItem + ChatColor.WHITE + " wins the game.");
-                        message.BroadcastMessage("GO! GO! GO!");
-                        plugin.GameRunning = true;
+                        plugin.StartGame();
                     } else {
                         message.PrivateMessage("You don't have the required permissions to use this command.", true);
                         return true;

@@ -2,6 +2,7 @@ package org.mcuni.speedrun;
 
 import org.apache.logging.log4j.message.Message;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -74,6 +75,26 @@ public class SpeedRun extends JavaPlugin {
         MessageHandlerClass.BroadcastMessage("[3/4] Setting players gamemode...");
         SetPlayerMode("adventure");
         MessageHandlerClass.BroadcastMessage("[4/4] The game has now ended and is ready to start again.");
+    }
+
+    public void StartGame() {
+        MessageHandlerClass.BroadcastMessage("SpeedRun is now starting");
+        MessageHandlerClass.BroadcastMessage("[1/4] Configuring game...");
+        MessageHandlerClass.BroadcastMessage("[2/4] Generating world...");
+        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "world create "+ Objects.requireNonNull(getConfig().getString("GameWorld")));
+
+        while (Bukkit.getWorld(Objects.requireNonNull(getConfig().getString("GameWorld"))) == null) {
+            // Wait...
+        }
+
+        MessageHandlerClass.BroadcastMessage("[3/4] Teleporting...");
+        TeleportPlayers("SpeedRun");
+        MessageHandlerClass.BroadcastMessage("[4/4] Setting gamemode...");
+        SetPlayerMode("survival");
+        MessageHandlerClass.BroadcastMessage("\n\n");
+        MessageHandlerClass.BroadcastMessage(ChatColor.WHITE + "The first person to find a " + ChatColor.GREEN + GoalItem + ChatColor.WHITE + " wins the game.");
+        MessageHandlerClass.BroadcastMessage("GO! GO! GO!");
+        GameRunning = true;
     }
 
     public void TeleportPlayers(String World) {
