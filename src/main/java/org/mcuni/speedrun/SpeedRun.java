@@ -86,6 +86,7 @@ public class SpeedRun extends JavaPlugin {
 
     public void TeleportPlayers(String World) {
         for(Player p : Bukkit.getOnlinePlayers()){
+            p.getInventory().clear();
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "tpp " + World + " " + p.getName());
         }
     }
