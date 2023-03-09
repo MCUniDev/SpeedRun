@@ -43,7 +43,7 @@ public class EntityPickupItem implements Listener {
 
                     if (itemStack.getType() == plugin.GoalItem) {
                         MessageHandler message = new MessageHandler(null);
-                        message.BroadcastMessage(player.getName() + " has WON this SpeedRun game!");
+                        message.BroadcastMessage(player.getName() + " has WON this SpeedRun game!\n\n");
                         plugin.EndGame();
                         message.BroadcastMessage("\n\n");
                         message.BroadcastMessage(player.getName() + " has WON this SpeedRun game!");
