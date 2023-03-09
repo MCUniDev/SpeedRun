@@ -24,7 +24,6 @@ public class SpeedRun extends JavaPlugin {
     protected EntityPickupItem EntityPickupItemClass;
     protected MessageHandler MessageHandlerClass;
     protected GameSystem GameSystemClass;
-    protected BossBarSystem BossBarSystemClass;
 
     @Override
     public void onEnable() {
@@ -33,12 +32,6 @@ public class SpeedRun extends JavaPlugin {
         loadClasses();
         loadCommands();
         loadEventHandlers();
-
-        if (Bukkit.getOnlinePlayers().size() > 0) {
-            for (Player on : Bukkit.getOnlinePlayers()) {
-                BossBarSystemClass.AddPlayer(on);
-            }
-        }
     }
 
     @Override
@@ -53,7 +46,6 @@ public class SpeedRun extends JavaPlugin {
         EntityPickupItemClass = new EntityPickupItem(this);
         MessageHandlerClass = new MessageHandler(null);
         GameSystemClass = new GameSystem(this);
-        BossBarSystemClass = new BossBarSystem(this);
     }
 
     /**
@@ -74,16 +66,6 @@ public class SpeedRun extends JavaPlugin {
         Bukkit.getServer().getPluginManager().registerEvents(EntityPickupItemClass, this);
     }
 
-    public void StartGame() {
-        GameSystemClass.StartGame();
-        BossBarSystemClass.ShowItem();
-    }
-
-    public void EndGame() {
-        GameSystemClass.EndGame();
-        BossBarSystemClass.HideItem();
-    }
-
     public void TeleportPlayers(String World) {
         for(Player p : Bukkit.getOnlinePlayers()){
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "tpp " + World + " " + p.getName());
@@ -94,13 +76,6 @@ public class SpeedRun extends JavaPlugin {
     public void SetPlayerMode(String Mode) {
         for(Player p : Bukkit.getOnlinePlayers()){
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "gamemode " + Mode + " " + p.getName());
-        }
-    }
-
-    @EventHandler
-    public void playerJoin(PlayerJoinEvent event) {
-        if (!BossBarSystemClass.GetBar().getPlayers().contains(event.getPlayer())) {
-            BossBarSystemClass.AddPlayer(event.getPlayer());
         }
     }
 }
