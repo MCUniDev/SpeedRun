@@ -5,7 +5,7 @@ api-version: 1.19
 authors: [ LewisMilburn, MCUniDev ]
 description: A basic Speed Run plugin by MCUni.
 website: https://dev.mcuni.org/speedrun
-depend: ["My_Worlds", "BKCommonLib"]
+load: STARTUP
 commands:
   speedrun:
     description: Main command

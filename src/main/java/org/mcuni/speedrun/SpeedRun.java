@@ -1,19 +1,10 @@
 package org.mcuni.speedrun;
 
-import org.apache.logging.log4j.message.Message;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.boss.BossBar;
-import org.bukkit.entity.Boss;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcuni.speedrun.commands.SpeedRunCommands;
 import org.mcuni.speedrun.events.EntityPickupItem;
-
-import java.util.Objects;
 
 public class SpeedRun extends JavaPlugin {
 
@@ -32,11 +23,16 @@ public class SpeedRun extends JavaPlugin {
         loadClasses();
         loadCommands();
         loadEventHandlers();
+
+        WorldHandler world = new WorldHandler(this);
+
+        if (world.WorldExists(getConfig().getString("GameWorld"))) {
+            world.DeleteGameWorld();
+        }
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
     }
 
     /**
@@ -64,18 +60,5 @@ public class SpeedRun extends JavaPlugin {
      */
     private void loadEventHandlers() {
         Bukkit.getServer().getPluginManager().registerEvents(EntityPickupItemClass, this);
-    }
-
-    public void TeleportPlayers(String World) {
-        for(Player p : Bukkit.getOnlinePlayers()){
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "tpp " + World + " " + p.getName());
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "clear " + p.getName());
-        }
-    }
-
-    public void SetPlayerMode(String Mode) {
-        for(Player p : Bukkit.getOnlinePlayers()){
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "gamemode " + Mode + " " + p.getName());
-        }
     }
 }

@@ -7,10 +7,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.mcuni.speedrun.GameSystem;
 import org.mcuni.speedrun.MessageHandler;
 import org.mcuni.speedrun.SpeedRun;
-
-import java.util.Objects;
 
 /**
      * Handles all /sr based commands.
@@ -37,6 +36,10 @@ public class SpeedRunCommands implements CommandExecutor {
      */
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
+        if (!(commandSender instanceof Player)) {
+            plugin.getLogger().warning("[SpeedRun] Sorry, you need to be an in-game player to use this command.");
+            return true;
+        }
         MessageHandler message = new MessageHandler(commandSender);
         Player player = (Player) commandSender;
         if (command.getName().equalsIgnoreCase("sr") || command.getName().equalsIgnoreCase("speedrun")) {
@@ -104,7 +107,8 @@ public class SpeedRunCommands implements CommandExecutor {
                             return true;
                         }
                         if (plugin.GameRunning) {
-                            plugin.EndGame();
+                            GameSystem Game = new GameSystem(plugin);
+                            Game.End();
                             message.BroadcastMessage("\n\n");
                             message.BroadcastMessage("Nobody won this SpeedRun game, better luck next time!");
                             return true;
@@ -126,24 +130,25 @@ public class SpeedRunCommands implements CommandExecutor {
                             message.PrivateMessage("You must set a goal item to start. Use /speedrun item <item> to set the goal item.", true);
                             return true;
                         }
-                        plugin.StartGame();
+                        GameSystem Game = new GameSystem(plugin);
+                        Game.Start();
                     } else {
                         message.PrivateMessage("You don't have the required permissions to use this command.", true);
                         return true;
                     }
                 } else if ("status".equals(args[0])) {
-                    message.PrivateMessage("------ Game Status ------", true);
+                    message.PrivateMessage("------ Game Status ------", false);
                     if (plugin.GameRunning) {
-                        message.PrivateMessage("PROGRESS: In progress", true);
+                        message.PrivateMessage("PROGRESS: In progress", false);
                     } else {
-                        message.PrivateMessage("PROGRESS: Waiting", true);
+                        message.PrivateMessage("PROGRESS: Waiting", false);
                     }
                     if (plugin.GoalItem == null) {
-                        message.PrivateMessage("GOAL: Not set", true);
+                        message.PrivateMessage("GOAL: Not set", false);
                     } else {
-                        message.PrivateMessage("GOAL: " + plugin.GoalItem, true);
+                        message.PrivateMessage("GOAL: " + plugin.GoalItem, false);
                     }
-                    message.PrivateMessage("------ Game Status ------", true);
+                    message.PrivateMessage("------ Game Status ------", false);
                 } else {
                     message.PrivateMessage("Unknown command. Use /speedrun help for help.", true);
                     return true;

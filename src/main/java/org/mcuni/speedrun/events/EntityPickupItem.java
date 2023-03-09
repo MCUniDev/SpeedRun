@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
+import org.mcuni.speedrun.GameSystem;
 import org.mcuni.speedrun.MessageHandler;
 import org.mcuni.speedrun.SpeedRun;
 
@@ -35,6 +36,7 @@ public class EntityPickupItem implements Listener {
             try {
                 Entity entity = event.getEntity();
                 if (entity instanceof Player) {
+
                     Player player = (Player) entity;
 
                     ItemStack itemStack = event.getItem().getItemStack();
@@ -42,15 +44,17 @@ public class EntityPickupItem implements Listener {
                     if (itemStack == null) return;
 
                     if (itemStack.getType() == plugin.GoalItem) {
+                        Bukkit.getLogger().severe("[SpeedRun][EntityPickupItem] Correct item matched.");
                         MessageHandler message = new MessageHandler(null);
                         message.BroadcastMessage(player.getName() + " has WON this SpeedRun game!\n\n");
-                        plugin.EndGame();
+                        GameSystem Game = new GameSystem(plugin);
+                        Game.End();
                         message.BroadcastMessage("\n\n");
                         message.BroadcastMessage(player.getName() + " has WON this SpeedRun game!");
                     }
                 }
             } catch (Exception e) {
-                Bukkit.getLogger().severe("[SpeedRun] EntityPickupItem had an error.");
+                Bukkit.getLogger().severe("[SpeedRun][EntityPickupItem] Error.");
                 e.printStackTrace();
             }
         }
