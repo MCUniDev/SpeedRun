@@ -99,6 +99,10 @@ public class SpeedRunCommands implements CommandExecutor {
                     }
                 } else if ("end".equals(args[0])) {
                     if (player.hasPermission("speedrun.admin")) {
+                        if (plugin.GameLoading) {
+                            message.PrivateMessage("The game is loading, please wait...", true);
+                            return true;
+                        }
                         if (plugin.GameRunning) {
                             plugin.EndGame();
                             message.BroadcastMessage("\n\n");
@@ -114,6 +118,10 @@ public class SpeedRunCommands implements CommandExecutor {
                     }
                 } else if ("startconfirm".equals(args[0])) {
                     if (player.hasPermission("speedrun.admin")) {
+                        if (plugin.GameLoading) {
+                            message.PrivateMessage("The game is loading, please wait...", true);
+                            return true;
+                        }
                         if (plugin.GoalItem == null) {
                             message.PrivateMessage("You must set a goal item to start. Use /speedrun item <item> to set the goal item.", true);
                             return true;

@@ -19,6 +19,7 @@ public class SpeedRun extends JavaPlugin {
 
     public Material GoalItem = null;
     public boolean GameRunning = false;
+    public boolean GameLoading = false;
 
     protected EntityPickupItem EntityPickupItemClass;
     protected MessageHandler MessageHandlerClass;

@@ -20,6 +20,6 @@ public class MessageHandler {
     }
 
     public void BroadcastMessage(String Message) {
-        Bukkit.broadcastMessage(ChatColor.GOLD + "[SpeedRun] " + ChatColor.YELLOW + Message);
+        Bukkit.broadcastMessage(ChatColor.GOLD + "SpeedRun > " + ChatColor.YELLOW + Message);
     }
 }
