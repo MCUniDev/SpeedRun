@@ -20,18 +20,15 @@ public class GameSystem {
         plugin.GameRunning = false;
         plugin.GoalItem = null;
 
-        MessageHandlerClass.BroadcastMessage("[1/4] Ending, Teleporting players...");
         plugin.TeleportPlayers(Objects.requireNonNull(plugin.getConfig().getString("ReturnWorld")));
-        MessageHandlerClass.BroadcastMessage("[2/4] Ending, Deleting world...");
+
         Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "world delete "+Objects.requireNonNull(plugin.getConfig().getString("GameWorld")));
 
         while (Bukkit.getWorld(Objects.requireNonNull(plugin.getConfig().getString("GameWorld"))) != null) {
             // Wait...
         }
 
-        MessageHandlerClass.BroadcastMessage("[3/4] Setting players gamemode...");
         plugin.SetPlayerMode("adventure");
-        MessageHandlerClass.BroadcastMessage("[4/4] The game has now ended and is ready to start again.");
     }
 
     public void StartGame() {
@@ -49,6 +46,7 @@ public class GameSystem {
         MessageHandlerClass.BroadcastMessage("[4/4] Setting gamemode...");
         plugin.SetPlayerMode("survival");
         MessageHandlerClass.BroadcastMessage("\n\n");
+        MessageHandlerClass.BroadcastMessage(ChatColor.RED + "Spawn protection is ON, walk out 16 blocks to build and mine!\n\n");
         MessageHandlerClass.BroadcastMessage(ChatColor.WHITE + "The first person to find a " + ChatColor.GREEN + plugin.GoalItem + ChatColor.WHITE + " wins the game.");
         MessageHandlerClass.BroadcastMessage("GO! GO! GO!");
         plugin.GameRunning = true;
