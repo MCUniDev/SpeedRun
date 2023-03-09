@@ -65,6 +65,6 @@ public class GameSystem {
                 plugin.GameLoading = false;
                 cancel();
             }
-        }.runTaskTimer(plugin,20*5,20*5);
+        }.runTaskTimer(plugin,0,20*5);
     }
 }
