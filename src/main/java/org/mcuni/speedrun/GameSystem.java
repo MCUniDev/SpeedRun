@@ -10,10 +10,12 @@ public class GameSystem {
 
     SpeedRun plugin;
     MessageHandler MessageHandlerClass;
+    BossBarHandler BossBarHandlerClass;
 
     public GameSystem(SpeedRun plugin) {
         this.plugin = plugin;
         MessageHandlerClass = new MessageHandler(null);
+        this.BossBarHandlerClass = new BossBarHandler(plugin);
         Bukkit.getLogger().info("[SpeedRun] GameSystem class loaded.");
     }
 
@@ -28,6 +30,8 @@ public class GameSystem {
 
         WorldHandler wh = new WorldHandler(plugin);
         wh.DeleteGameWorld();
+
+        BossBarHandlerClass.DestroyBossBar();
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -68,6 +72,7 @@ public class GameSystem {
                             MessageHandlerClass.BroadcastMessage(ChatColor.RED + "Spawn protection is ON, walk out 16 blocks to build and mine!\n\n");
                             MessageHandlerClass.BroadcastMessage(ChatColor.WHITE + "The first person to find a " + ChatColor.GREEN + plugin.GoalItem + ChatColor.WHITE + " wins the game.");
                             MessageHandlerClass.BroadcastMessage("GO! GO! GO!");
+                            BossBarHandlerClass.CreateBossBar(String.valueOf(plugin.GoalItem));
                             plugin.GameRunning = true;
                             plugin.GameLoading = false;
                             cancel();

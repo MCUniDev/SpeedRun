@@ -1,5 +1,6 @@
 package org.mcuni.speedrun;
 
+import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -10,6 +11,7 @@ import org.mcuni.speedrun.events.InventoryClick;
 public class SpeedRun extends JavaPlugin {
 
     public Material GoalItem = null;
+    public BossBar bossbar;
     public boolean GameRunning = false;
     public boolean GameLoading = false;
 
@@ -34,8 +36,7 @@ public class SpeedRun extends JavaPlugin {
     }
 
     @Override
-    public void onDisable() {
-    }
+    public void onDisable() {}
 
     /**
      * Loads any classes that can't be loaded by initializers.
