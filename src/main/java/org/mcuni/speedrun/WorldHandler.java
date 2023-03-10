@@ -16,16 +16,17 @@ public class WorldHandler {
 
     public WorldHandler(SpeedRun plugin) {
         this.plugin = plugin;
-        Bukkit.getLogger().info("[SpeedRun] WorldHandler started.");
+        Bukkit.getLogger().info("[SpeedRun][WorldHandler] Started.");
     }
 
     public void CreateGameWorld() {
+        Bukkit.getLogger().info("[SpeedRun][WorldHandler] Creating game world, this could take some time...");
+
         if (WorldExists(Objects.requireNonNull(plugin.getConfig().getString("GameWorld")))) {
             Bukkit.getLogger().warning("[SpeedRun][WorldHandler] Attempted to create already existing world (deleting world first).");
             DeleteGameWorld();
         }
 
-        Bukkit.getLogger().info("[SpeedRun][WorldHandler] Creating game world, this could take some time...");
         WorldCreator wc = new WorldCreator(Objects.requireNonNull(plugin.getConfig().getString("GameWorld")));
 
         wc.environment(World.Environment.NORMAL);

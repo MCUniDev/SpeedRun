@@ -16,10 +16,11 @@ public class GameSystem {
         this.plugin = plugin;
         MessageHandlerClass = new MessageHandler(null);
         this.BossBarHandlerClass = new BossBarHandler(plugin);
-        Bukkit.getLogger().info("[SpeedRun] GameSystem class loaded.");
+        Bukkit.getLogger().info("[SpeedRun][GameSystem] Class started.");
     }
 
     public void End() {
+        Bukkit.getLogger().info("[SpeedRun][GameSystem] Ending game...");
         plugin.GameLoading = true;
         plugin.GameRunning = false;
         plugin.GoalItem = null;
@@ -39,12 +40,14 @@ public class GameSystem {
                     // Wait...
                 }
                 plugin.GameLoading = false;
+                Bukkit.getLogger().info("[SpeedRun][GameSystem] Game ended.");
                 cancel();
             }
         }.runTaskTimer(plugin,0,20*5);
     }
 
     public void Start() {
+        Bukkit.getLogger().info("[SpeedRun][GameSystem] Starting game...");
         plugin.GameLoading = true;
         MessageHandlerClass.BroadcastMessage("SpeedRun is now starting");
         MessageHandlerClass.BroadcastMessage("[1/4] Configuring game...");
@@ -85,6 +88,7 @@ public class GameSystem {
                     plugin.GoalItem = null;
                 }
 
+                Bukkit.getLogger().info("[SpeedRun][GameSystem] Game started...");
                 cancel();
             }
         }.runTaskTimer(plugin,0,20*5);

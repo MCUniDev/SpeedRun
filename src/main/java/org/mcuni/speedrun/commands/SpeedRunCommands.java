@@ -23,7 +23,7 @@ public class SpeedRunCommands implements CommandExecutor {
      */
     public SpeedRunCommands(SpeedRun plugin) {
         this.plugin = plugin;
-        Bukkit.getLogger().info("[SpeedRun] SpeedRunCommands command handler loaded.");
+        Bukkit.getLogger().info("[SpeedRun][SpeedRunCommands] Command handler loaded.");
     }
 
     /**
@@ -37,7 +37,7 @@ public class SpeedRunCommands implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if (!(commandSender instanceof Player)) {
-            plugin.getLogger().warning("[SpeedRun] Sorry, you need to be an in-game player to use this command.");
+            plugin.getLogger().warning("[SpeedRun][SpeedRunCommands] Sorry, you need to be an in-game player to use this command.");
             return true;
         }
         MessageHandler message = new MessageHandler(commandSender);
@@ -75,6 +75,7 @@ public class SpeedRunCommands implements CommandExecutor {
                         {
                             plugin.GoalItem = Material.valueOf(materialName );
                             message.PrivateMessage("Item has been set to " + plugin.GoalItem, false);
+                            Bukkit.getLogger().info("[SpeedRun][SpeedRunCommands] Goal item set to "+plugin.GoalItem);
                         }
                         catch (Exception e)
                         {
@@ -88,6 +89,7 @@ public class SpeedRunCommands implements CommandExecutor {
                     }
                 } else if ("start".equals(args[0])) {
                     if (player.hasPermission("speedrun.admin")) {
+                        Bukkit.getLogger().info("[SpeedRun][SpeedRunCommands] Triggered SpeedRun start, awaiting confirmation...");
                         if (plugin.GoalItem == null) {
                             message.PrivateMessage("You must set a goal item to start. Use /speedrun item <item> to set the goal item.", true);
                             return true;
@@ -107,6 +109,7 @@ public class SpeedRunCommands implements CommandExecutor {
                             return true;
                         }
                         if (plugin.GameRunning) {
+                            Bukkit.getLogger().info("[SpeedRun][SpeedRunCommands] Triggered SpeedRun end.");
                             GameSystem Game = new GameSystem(plugin);
                             Game.End();
                             message.BroadcastMessage("\n\n");
@@ -130,6 +133,7 @@ public class SpeedRunCommands implements CommandExecutor {
                             message.PrivateMessage("You must set a goal item to start. Use /speedrun item <item> to set the goal item.", true);
                             return true;
                         }
+                        Bukkit.getLogger().info("[SpeedRun][SpeedRunCommands] Triggered SpeedRun start, confirmed.");
                         GameSystem Game = new GameSystem(plugin);
                         Game.Start();
                     } else {

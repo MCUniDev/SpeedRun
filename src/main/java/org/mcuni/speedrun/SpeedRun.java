@@ -22,6 +22,7 @@ public class SpeedRun extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        Bukkit.getLogger().info("[SpeedRun] Beginning startup sequence.");
         saveDefaultConfig();
 
         loadClasses();
@@ -33,6 +34,7 @@ public class SpeedRun extends JavaPlugin {
         if (world.WorldExists(getConfig().getString("GameWorld"))) {
             world.DeleteGameWorld();
         }
+        Bukkit.getLogger().info("[SpeedRun] Startup completed.");
     }
 
     @Override
@@ -42,28 +44,34 @@ public class SpeedRun extends JavaPlugin {
      * Loads any classes that can't be loaded by initializers.
      */
     private void loadClasses() {
+        Bukkit.getLogger().info("[SpeedRun] Loading classes...");
         EntityPickupItemClass = new EntityPickupItem(this);
         InventoryClickClass = new InventoryClick(this);
         MessageHandlerClass = new MessageHandler(null);
         GameSystemClass = new GameSystem(this);
+        Bukkit.getLogger().info("[SpeedRun] Classes loaded...");
     }
 
     /**
      * Loads and registers the plugin's command handlers.
      */
     private void loadCommands() {
+        Bukkit.getLogger().info("[SpeedRun] Loading commands...");
         try {
             this.getCommand("speedrun").setExecutor(new SpeedRunCommands(this));
         } catch (NullPointerException e) {
             Bukkit.getLogger().severe("[SpeedRun] ERROR: Couldn't enable /speedrun command.");
         }
+        Bukkit.getLogger().info("[SpeedRun] Commands loaded.");
     }
 
     /**
      * Loads and registers all the plugin's event handlers.
      */
     private void loadEventHandlers() {
+        Bukkit.getLogger().info("[SpeedRun] Loading event handlers...");
         Bukkit.getServer().getPluginManager().registerEvents(EntityPickupItemClass, this);
         Bukkit.getServer().getPluginManager().registerEvents(InventoryClickClass, this);
+        Bukkit.getLogger().info("[SpeedRun] Event handlers loaded.");
     }
 }

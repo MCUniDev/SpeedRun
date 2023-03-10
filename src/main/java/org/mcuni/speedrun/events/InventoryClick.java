@@ -22,7 +22,7 @@ public class InventoryClick implements Listener {
      */
     public InventoryClick(SpeedRun plugin) {
         this.plugin = plugin;
-        Bukkit.getLogger().info("[SpeedRun] InventoryClickEvent event handler started.");
+        Bukkit.getLogger().info("[SpeedRun][InventoryClickEvent] Event handler started.");
     }
 
     /**

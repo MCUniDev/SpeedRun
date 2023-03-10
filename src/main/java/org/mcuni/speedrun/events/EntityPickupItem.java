@@ -23,7 +23,7 @@ public class EntityPickupItem implements Listener {
      */
     public EntityPickupItem(SpeedRun plugin) {
         this.plugin = plugin;
-        Bukkit.getLogger().info("[SpeedRun] EntityPickupItem event handler started.");
+        Bukkit.getLogger().info("[SpeedRun][EntityPickupItem] Event handler started.");
     }
 
     /**

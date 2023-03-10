@@ -11,7 +11,7 @@ public class BossBarHandler {
 
     public BossBarHandler(SpeedRun plugin) {
         this.plugin = plugin;
-        Bukkit.getLogger().info("[SpeedRun] BossBarHandler class started.");
+        Bukkit.getLogger().info("[SpeedRun][BossBarHandler] Class started.");
     }
 
     public void CreateBossBar(String name) {

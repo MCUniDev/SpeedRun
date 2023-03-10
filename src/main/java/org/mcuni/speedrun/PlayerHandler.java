@@ -12,9 +12,11 @@ public class PlayerHandler {
 
     public PlayerHandler(SpeedRun plugin) {
         this.plugin = plugin;
+        Bukkit.getLogger().info("[SpeedRun][PlayerHandler] Class started.");
     }
 
     public boolean TeleportAll(String world) {
+        Bukkit.getLogger().info("[SpeedRun][PlayerHandler] Teleporting all players...");
         WorldHandler wh = new WorldHandler(plugin);
 
         if (wh.WorldExists(world)) {
@@ -30,9 +32,11 @@ public class PlayerHandler {
     }
 
     public void SetAllPlayerMode(String Mode) {
+        Bukkit.getLogger().info("[SpeedRun][PlayerHandler] Setting all players gamemodes...");
         for(Player player : plugin.getServer().getOnlinePlayers()) {
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "gamemode " + Mode + " " + player.getName());
         }
+        Bukkit.getLogger().info("[SpeedRun][PlayerHandler] Set all players gamemodes.");
     }
 
     public void ClearAllPlayerInventory() {
@@ -46,8 +50,10 @@ public class PlayerHandler {
     }
 
     private void DoClearAllPlayerInventory() {
+        Bukkit.getLogger().info("[SpeedRun][PlayerHandler] Clearing all players inventories...");
         for(Player player : plugin.getServer().getOnlinePlayers()) {
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "clear " + player.getName());
         }
+        Bukkit.getLogger().info("[SpeedRun][PlayerHandler] Cleared all players inventories.");
     }
 }
