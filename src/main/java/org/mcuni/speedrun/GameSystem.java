@@ -83,7 +83,7 @@ public class GameSystem {
                             plugin.GameLoading = false;
                             cancel();
                         }
-                    }.runTaskTimer(plugin,20*5,20*10);
+                    }.runTaskTimer(plugin,20*7,20*10);
                 } else {
                     MessageHandlerClass.BroadcastMessage(ChatColor.RED + "There was an error whilst starting the game, please see the console for more information.");
                     plugin.GameRunning = false;
