@@ -61,12 +61,18 @@ public class GameSystem {
                     ph.ClearAllPlayerInventory();
                     ph.SetAllPlayerMode("survival");
                     MessageHandlerClass.BroadcastMessage("\n\n");
-                    MessageHandlerClass.BroadcastMessage(ChatColor.RED + "It may take a few seconds to load the terrain around you.\n\n");
-                    MessageHandlerClass.BroadcastMessage(ChatColor.RED + "Spawn protection is ON, walk out 16 blocks to build and mine!\n\n");
-                    MessageHandlerClass.BroadcastMessage(ChatColor.WHITE + "The first person to find a " + ChatColor.GREEN + plugin.GoalItem + ChatColor.WHITE + " wins the game.");
-                    MessageHandlerClass.BroadcastMessage("GO! GO! GO!");
-                    plugin.GameRunning = true;
-                    plugin.GameLoading = false;
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            MessageHandlerClass.BroadcastMessage(ChatColor.RED + "It may take a few seconds to load the terrain around you.\n\n");
+                            MessageHandlerClass.BroadcastMessage(ChatColor.RED + "Spawn protection is ON, walk out 16 blocks to build and mine!\n\n");
+                            MessageHandlerClass.BroadcastMessage(ChatColor.WHITE + "The first person to find a " + ChatColor.GREEN + plugin.GoalItem + ChatColor.WHITE + " wins the game.");
+                            MessageHandlerClass.BroadcastMessage("GO! GO! GO!");
+                            plugin.GameRunning = true;
+                            plugin.GameLoading = false;
+                            cancel();
+                        }
+                    }.runTaskTimer(plugin,20*4,20*10);
                 } else {
                     MessageHandlerClass.BroadcastMessage(ChatColor.RED + "There was an error whilst starting the game, please see the console for more information.");
                     plugin.GameRunning = false;
