@@ -37,7 +37,7 @@ public class GameSystem {
                 plugin.GameLoading = false;
                 cancel();
             }
-        }.runTaskTimer(plugin,20*10,20*10);
+        }.runTaskTimer(plugin,0,20*5);
     }
 
     public void Start() {
