@@ -71,9 +71,12 @@ public class GameSystem {
                     new BukkitRunnable() {
                         @Override
                         public void run() {
+                            String GoalItem = String.valueOf(plugin.GoalItem);
+                            GoalItem = GoalItem.replace('_', ' ');
+
                             MessageHandlerClass.BroadcastMessage(ChatColor.RED + "It may take a few seconds to load the terrain around you.\n\n");
                             MessageHandlerClass.BroadcastMessage(ChatColor.RED + "Spawn protection is ON, walk out 16 blocks to build and mine!\n\n");
-                            MessageHandlerClass.BroadcastMessage(ChatColor.WHITE + "The first person to find a " + ChatColor.GREEN + plugin.GoalItem + ChatColor.WHITE + " wins the game.");
+                            MessageHandlerClass.BroadcastMessage(ChatColor.WHITE + "The first person to find a " + ChatColor.GREEN + GoalItem + ChatColor.WHITE + " wins the game.");
                             MessageHandlerClass.BroadcastMessage("GO! GO! GO!");
                             BossBarHandlerClass.CreateBossBar(String.valueOf(plugin.GoalItem));
                             plugin.GameRunning = true;

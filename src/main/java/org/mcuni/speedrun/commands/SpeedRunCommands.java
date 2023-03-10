@@ -61,7 +61,9 @@ public class SpeedRunCommands implements CommandExecutor {
                         if (plugin.GoalItem == null) {
                             message.PrivateMessage("There is no item currently set. Use /speedrun item <item> to set an item.", true);
                         } else {
-                            message.PrivateMessage("The current goal item is " + plugin.GoalItem, false);
+                            String GoalItem = String.valueOf(plugin.GoalItem);
+                            GoalItem = GoalItem.replace('_' , ' ');
+                            message.PrivateMessage("The current goal item is " + GoalItem, false);
                         }
                         return true;
                     }
@@ -73,8 +75,10 @@ public class SpeedRunCommands implements CommandExecutor {
                         String materialName = args[1].toUpperCase();
                         try
                         {
-                            plugin.GoalItem = Material.valueOf(materialName );
-                            message.PrivateMessage("Item has been set to " + plugin.GoalItem, false);
+                            plugin.GoalItem = Material.valueOf(materialName);
+                            String GoalItem = String.valueOf(plugin.GoalItem);
+                            GoalItem = GoalItem.replace('_' , ' ');
+                            message.PrivateMessage("Item has been set to " + GoalItem, false);
                             Bukkit.getLogger().info("[SpeedRun][SpeedRunCommands] Goal item set to "+plugin.GoalItem);
                         }
                         catch (Exception e)
@@ -150,7 +154,9 @@ public class SpeedRunCommands implements CommandExecutor {
                     if (plugin.GoalItem == null) {
                         message.PrivateMessage("GOAL: Not set", false);
                     } else {
-                        message.PrivateMessage("GOAL: " + plugin.GoalItem, false);
+                        String GoalItem = String.valueOf(plugin.GoalItem);
+                        GoalItem = GoalItem.replace('_' , ' ');
+                        message.PrivateMessage("GOAL: " + GoalItem, false);
                     }
                     message.PrivateMessage("------ Game Status ------", false);
                 } else {
