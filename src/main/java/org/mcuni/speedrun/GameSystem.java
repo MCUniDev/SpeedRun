@@ -24,6 +24,7 @@ public class GameSystem {
 
         PlayerHandler ph = new PlayerHandler(plugin);
         ph.TeleportAll(Objects.requireNonNull(plugin.getConfig().getString("ReturnWorld")));
+        ph.ClearAllPlayerInventory();
 
         WorldHandler wh = new WorldHandler(plugin);
         wh.DeleteGameWorld();
@@ -53,11 +54,11 @@ public class GameSystem {
                 while (!world.WorldExists(plugin.getConfig().getString("GameWorld"))) {
                     // Wait...
                 }
-
                 MessageHandlerClass.BroadcastMessage("[3/4] Teleporting...");
                 PlayerHandler ph = new PlayerHandler(plugin);
                 if (ph.TeleportAll("SpeedRun")) {
                     MessageHandlerClass.BroadcastMessage("[4/4] Setting gamemode...");
+                    ph.ClearAllPlayerInventory();
                     ph.SetAllPlayerMode("survival");
                     MessageHandlerClass.BroadcastMessage("\n\n");
                     MessageHandlerClass.BroadcastMessage(ChatColor.RED + "It may take a few seconds to load the terrain around you.\n\n");

@@ -29,8 +29,10 @@ public class PlayerHandler {
     }
 
     public void SetAllPlayerMode(String Mode) {
-        for(Player p : Bukkit.getOnlinePlayers()){
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "gamemode " + Mode + " " + p.getName());
-        }
+        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "gamemode " + Mode + " *");
+    }
+
+    public void ClearAllPlayerInventory() {
+        plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), "clear *");
     }
 }
