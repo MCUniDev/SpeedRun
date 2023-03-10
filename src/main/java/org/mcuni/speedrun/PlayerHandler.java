@@ -2,6 +2,7 @@ package org.mcuni.speedrun;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Objects;
 
@@ -29,10 +30,24 @@ public class PlayerHandler {
     }
 
     public void SetAllPlayerMode(String Mode) {
-        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "gamemode " + Mode + " *");
+        for(Player player : plugin.getServer().getOnlinePlayers()) {
+            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "gamemode " + Mode + " " + player.getName());
+        }
     }
 
     public void ClearAllPlayerInventory() {
-        plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), "clear *");
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                DoClearAllPlayerInventory();
+                cancel();
+            }
+        }.runTaskTimer(plugin,20*2,20*10);
+    }
+
+    private void DoClearAllPlayerInventory() {
+        for(Player player : plugin.getServer().getOnlinePlayers()) {
+            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "clear " + player.getName());
+        }
     }
 }
