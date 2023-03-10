@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcuni.speedrun.commands.SpeedRunCommands;
 import org.mcuni.speedrun.events.EntityPickupItem;
+import org.mcuni.speedrun.events.InventoryClick;
 
 public class SpeedRun extends JavaPlugin {
 
@@ -13,6 +14,7 @@ public class SpeedRun extends JavaPlugin {
     public boolean GameLoading = false;
 
     protected EntityPickupItem EntityPickupItemClass;
+    protected InventoryClick InventoryClickClass;
     protected MessageHandler MessageHandlerClass;
     protected GameSystem GameSystemClass;
 
@@ -40,6 +42,7 @@ public class SpeedRun extends JavaPlugin {
      */
     private void loadClasses() {
         EntityPickupItemClass = new EntityPickupItem(this);
+        InventoryClickClass = new InventoryClick(this);
         MessageHandlerClass = new MessageHandler(null);
         GameSystemClass = new GameSystem(this);
     }
@@ -60,5 +63,6 @@ public class SpeedRun extends JavaPlugin {
      */
     private void loadEventHandlers() {
         Bukkit.getServer().getPluginManager().registerEvents(EntityPickupItemClass, this);
+        Bukkit.getServer().getPluginManager().registerEvents(InventoryClickClass, this);
     }
 }
