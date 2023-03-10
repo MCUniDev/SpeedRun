@@ -46,10 +46,8 @@ public class EntityPickupItem implements Listener {
                     if (itemStack.getType() == plugin.GoalItem) {
                         Bukkit.getLogger().info("[SpeedRun][EntityPickupItem] Correct item matched.");
                         MessageHandler message = new MessageHandler(null);
-                        message.BroadcastMessage(player.getName() + " has WON this SpeedRun game!\n\n");
                         GameSystem Game = new GameSystem(plugin);
                         Game.End();
-                        message.BroadcastMessage("\n\n");
                         message.BroadcastMessage(player.getName() + " has WON this SpeedRun game!");
                     }
                 }
