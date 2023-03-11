@@ -30,6 +30,7 @@ public class PlayerHandler {
                 } else {
                     plugin.getServer().getLogger().severe("[SpeedRun][PlayerHandler] Attempted to teleport players to non-existent world (aborted).");
                 }
+                cancel();
             }
         }.runTaskTimer(plugin,20*delay,20*10);
         return true;

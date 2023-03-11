@@ -36,9 +36,6 @@ public class GameSystem {
         new BukkitRunnable() {
             @Override
             public void run() {
-                while (Bukkit.getWorld(Objects.requireNonNull(plugin.getConfig().getString("GameWorld"))) != null) {
-                    // Wait...
-                }
                 plugin.GameLoading = false;
                 Bukkit.getLogger().info("[SpeedRun][GameSystem] Game ended.");
                 cancel();
