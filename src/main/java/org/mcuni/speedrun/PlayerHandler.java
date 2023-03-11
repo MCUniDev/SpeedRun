@@ -15,20 +15,24 @@ public class PlayerHandler {
         Bukkit.getLogger().info("[SpeedRun][PlayerHandler] Class started.");
     }
 
-    public boolean TeleportAll(String world) {
-        Bukkit.getLogger().info("[SpeedRun][PlayerHandler] Teleporting all players...");
-        WorldHandler wh = new WorldHandler(plugin);
+    public boolean TeleportAll(String world, int delay) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                Bukkit.getLogger().info("[SpeedRun][PlayerHandler] Teleporting all players...");
+                WorldHandler wh = new WorldHandler(plugin);
 
-        if (wh.WorldExists(world)) {
-            for(Player player : plugin.getServer().getOnlinePlayers()) {
-                player.teleport(Objects.requireNonNull(plugin.getServer().getWorld(world)).getSpawnLocation());
+                if (wh.WorldExists(world)) {
+                    for(Player player : plugin.getServer().getOnlinePlayers()) {
+                        player.teleport(Objects.requireNonNull(plugin.getServer().getWorld(world)).getSpawnLocation());
+                    }
+                    plugin.getServer().getLogger().info("[SpeedRun][PlayerHandler] Teleported all players to "+world);
+                } else {
+                    plugin.getServer().getLogger().severe("[SpeedRun][PlayerHandler] Attempted to teleport players to non-existent world (aborted).");
+                }
             }
-            plugin.getServer().getLogger().info("[SpeedRun][PlayerHandler] Teleported all players to "+world);
-            return true;
-        } else {
-            plugin.getServer().getLogger().severe("[SpeedRun][PlayerHandler] Attempted to teleport players to non-existent world (aborted).");
-            return false;
-        }
+        }.runTaskTimer(plugin,20*delay,20*10);
+        return true;
     }
 
     public void SetAllPlayerMode(String Mode) {

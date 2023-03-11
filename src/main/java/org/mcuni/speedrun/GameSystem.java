@@ -26,7 +26,7 @@ public class GameSystem {
         plugin.GoalItem = null;
 
         PlayerHandler ph = new PlayerHandler(plugin);
-        ph.TeleportAll(Objects.requireNonNull(plugin.getConfig().getString("ReturnWorld")));
+        ph.TeleportAll(Objects.requireNonNull(plugin.getConfig().getString("ReturnWorld")), 0);
         ph.ClearAllPlayerInventory();
 
         WorldHandler wh = new WorldHandler(plugin);
@@ -63,7 +63,7 @@ public class GameSystem {
                 }
                 MessageHandlerClass.BroadcastMessage("[3/4] Teleporting...");
                 PlayerHandler ph = new PlayerHandler(plugin);
-                if (ph.TeleportAll("SpeedRun")) {
+                if (ph.TeleportAll("SpeedRun", 10)) {
                     MessageHandlerClass.BroadcastMessage("[4/4] Setting gamemode...");
                     ph.ClearAllPlayerInventory();
                     ph.SetAllPlayerMode("survival");
@@ -83,7 +83,7 @@ public class GameSystem {
                             plugin.GameLoading = false;
                             cancel();
                         }
-                    }.runTaskTimer(plugin,20*7,20*10);
+                    }.runTaskTimer(plugin,20*17,20*10);
                 } else {
                     MessageHandlerClass.BroadcastMessage(ChatColor.RED + "There was an error whilst starting the game, please see the console for more information.");
                     plugin.GameRunning = false;
